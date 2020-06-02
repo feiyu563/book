@@ -11,7 +11,7 @@ description: >-
 ![author](https://img.shields.io/badge/author-jikun.zhang-blueviolet.svg) ![license](https://img.shields.io/github/license/feiyu563/PrometheusAlert.svg) ![last commit](https://img.shields.io/github/last-commit/feiyu563/PrometheusAlert.svg) ![issues](https://img.shields.io/github/issues/feiyu563/PrometheusAlert.svg) ![stars](https://img.shields.io/github/stars/feiyu563/PrometheusAlert.svg) ![forks](https://img.shields.io/github/forks/feiyu563/PrometheusAlert.svg) [![docker](https://img.shields.io/docker/pulls/feiyu563/prometheus-alert.svg)](https://hub.docker.com/r/feiyu563/prometheus-alert)![Travis](https://img.shields.io/badge/language-Go-green.svg) ![Travis](https://img.shields.io/badge/language-JavaScript-yellow.svg)![Travis](https://img.shields.io/badge/language-Shell-blue.svg)
 
 * 如果这个项目能为您带来帮助，我将感到非常荣幸！同时非常欢迎您加入PrometheusAlert全家桶的微信群一起探讨关于PrometheusAlert新一期的开发计划。
-* PrometheusAlert的成长离不开所有爱好运维和开发的朋友们的支持！如果您也对这个项目感兴趣，请点击一下 Star 以示鼓励，谢谢
+* PrometheusAlert的成长离不开所有爱好运维和开发的朋友们的支持！如果您也对这个项目感兴趣，请[点击一下 Star](https://github.com/feiyu563/PrometheusAlert/stargazers) 以示鼓励，谢谢
 
   
 
