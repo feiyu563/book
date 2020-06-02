@@ -28,4 +28,5 @@
   * [使用自定义告警消息模版](prometheusalert-gao-ji-zi-ding-yi-xiao-xi-mo-ban/shi-yong-zi-ding-yi-gao-jing-xiao-xi-mo-ban.md)
 * [如何进行【PrometheusAlert】二次开发](ru-he-jin-hang-prometheusalert-er-ci-kai-fa.md)
 * [版本更新说明](https://github.com/feiyu563/PrometheusAlert/releases)
+* [如何更新这个页面](ru-he-geng-xin-zhe-ge-ye-mian.md)
 
