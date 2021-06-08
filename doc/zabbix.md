@@ -1,14 +1,10 @@
-# zabbix配置
-
-
-
-### zabbix接入配置
+## zabbix接入配置
 
 PrometheusAlert For zabbix采用C/S方式。需要现在zabbix-server上部署zabbixclient客户端。
 
-* 部署zabbixclient客户端，zabbixclient需要部署在和zabbix-server一起。
+- 部署zabbixclient客户端，zabbixclient需要部署在和zabbix-server一起。
 
-```text
+```
 #进入到zabbix-server所在服务器
 git clone https://github.com/feiyu563/PrometheusAlert.git
 cp PrometheusAlert/example/linux/zabbixclient /usr/lib/zabbix/alertscripts/
@@ -16,9 +12,9 @@ chown zabbix:zabbix /usr/lib/zabbix/alertscripts/zabbixclient
 chmod 755 /usr/lib/zabbix/alertscripts/zabbixclient
 ```
 
-* zabbixclient支持参数。
+- zabbixclient支持参数。
 
-```text
+```
 [root@k8s-master01 linux]# zabbixclient -h
 Version 1.1 If you need help contact 244217140@qq.com or visit https://github.com/feiyu563/PrometheusAlert
 Usage: zabbixclient [-h] [-t SendTarget] [-m SendMessage] [-type SendType] [-d PrometheusAlertUrl]
@@ -26,23 +22,23 @@ Example(发送告警到钉钉)：zabbixclent -t https://oapi.dingtalk.com/robot/
 
 Options:
   -d PrometheusAlert的地址
-        PrometheusAlert的地址 (default "http://127.0.0.1:8080/zabbix")
-  -h    显示帮助
+    	PrometheusAlert的地址 (default "http://127.0.0.1:8080/zabbix")
+  -h	显示帮助
   -m 告警消息内容
-        需要发送的告警消息内容 (default "zabbix告警测试")
+    	需要发送的告警消息内容 (default "zabbix告警测试")
   -t 手机号/钉钉url/微信url/飞书url
-        指定告警消息的接收目标的手机号/钉钉url/微信url (default "https://oapi.dingtalk.com/robot/send?access_token=xxxxx")
+    	指定告警消息的接收目标的手机号/钉钉url/微信url (default "https://oapi.dingtalk.com/robot/send?access_token=xxxxx")
   -type txdx(腾讯云短信)、txdh(腾讯云电话)、alydx(阿里云短信)、alydh(阿里云电话)、hwdx(华为云短信)、rlydh(荣联云电话)、dd(钉钉)、wx(微信)、fs(飞书)
-        告警消息的目标类型,支持txdx(腾讯云短信)、txdh(腾讯云电话)、alydx(阿里云短信)、alydh(阿里云电话)、hwdx(华为云短信)、rlydh(荣联云电话)、dd(钉钉)、wx(微信)、fs(飞书) (default "dd")
+    	告警消息的目标类型,支持txdx(腾讯云短信)、txdh(腾讯云电话)、alydx(阿里云短信)、alydh(阿里云电话)、hwdx(华为云短信)、rlydh(荣联云电话)、dd(钉钉)、wx(微信)、fs(飞书) (default "dd")
 ```
 
 Zabbix后台配置
 
-1\) 首先需要在zabbix后台新增报警媒介，进入 管理--&gt;报警媒介--&gt;创建媒介类型，配置如图：
+1) 首先需要在zabbix后台新增报警媒介，进入 管理-->报警媒介-->创建媒介类型，配置如图：
 
 ![zabbix1](https://gitee.com/feiyu563/PrometheusAlert/raw/master/doc/zabbix1.png)
 
-```text
+```
 #脚本参数
     -t
     https://oapi.dingtalk.com/robot/send?access_token=xxxxxxxxxxxxxxxxxxxxxxxxxxx #指定告警消息的接收目标的手机号/钉钉url/微信url，注意需要与-type参数对应
@@ -54,11 +50,11 @@ Zabbix后台配置
     http://[prometheusalert-url]/zabbix/alert  #PrometheusAlert的地址
 ```
 
-2\) 将报警媒介分配给用户，进入 用户--&gt;点击需要分配的用户名--&gt;报警媒介--&gt;添加。如图：
+2) 将报警媒介分配给用户，进入 用户-->点击需要分配的用户名-->报警媒介-->添加。如图：
 
 ![zabbix2](https://gitee.com/feiyu563/PrometheusAlert/raw/master/doc/zabbix2.png)
 
-3\) 继续添加告警动作，进入 配置--&gt;动作--&gt;创建动作。如图：
+3) 继续添加告警动作，进入 配置-->动作-->创建动作。如图：
 
 ![zabbix3](https://gitee.com/feiyu563/PrometheusAlert/raw/master/doc/zabbix3.png)
 
@@ -66,7 +62,7 @@ Zabbix后台配置
 
 最关键的配置就是消息内容的部分，可以参考以下消息模版：
 
-```text
+```
 1.钉钉消息模版
 
 //操作消息模版
@@ -196,15 +192,15 @@ Zabbix后台配置
 故障主机IP：{HOST.IP} {USER.FULLNAME} 已经确认故障原因
 ```
 
-4\) 最终告警效果:
+
+4) 最终告警效果:
 
 ![zabbix5](https://gitee.com/feiyu563/PrometheusAlert/raw/master/doc/zabbix5.png)
 
-5\) zabbixclient其他用法
+5) zabbixclient其他用法
 
 其中命令行工具zabbixclient不仅支持作为监控系统Zabbix的告警中心代理客户端，同时也可作为一个单独的命令行客户端工具来使用，zabbixclient的存在，使其他监控系统能够更容易得接入PrometheusAlert告警中心，zabbixclient支持的参数如下：
 
-```text
+```
 ./zabbixclient -t https://oapi.dingtalk.com/robot/send?access_token=xxxxxxx -m 'PrometheusAlert告警平台告警测试' -type dd -d http://dingding.datafountain.cn/zabbix
 ```
-
