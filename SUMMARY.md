@@ -29,6 +29,7 @@
   * [zabbix（内置固定消息模版）接入配置](doc/zabbix.md)
   * [sonarqube（自定义消息模版）接入配置](doc/sonarqube.md)
   * [jenkins（自定义消息模版）接入配置](doc/jenkins.md)
+  * [阿里云-云监控（自定义消息模版）接入配置](doc/yunjiankong.md)
 * [【WebHook】](doc/webhook.md)
 * [【MarkDown测试】](doc/markdowntest.md)
 * [如何进行【PrometheusAlert】二次开发](DEVELOP.md)
