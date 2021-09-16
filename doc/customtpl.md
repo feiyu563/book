@@ -8,6 +8,15 @@
 
 #### 新增功能：url参数中 `ddurl、wxurl、fsurl、phone、email、wxuser、wxparty、wxtag、groupid `等可不写，如不写这些参数，则会默认去读取配置文件中的对应参数发送消息
 
+#### 新增功能：url参数中支持参数 rr=true， 该参数为开启随机轮询，目前仅针对ddurl，fsurl，wxurl有效，默认情况下如果上述Url配置的是多个地址，则多个地址全部发送，如开启该选项，则从多个地址中随机取一个地址发送，主要是为了避免消息发送频率过高导致触发部分机器人拦截消息
+
+参考配置：
+```
+- name: 'prometheusalert-all'
+  webhook_configs:
+  - url: 'http://[prometheusalert_url]:8080/prometheusalert?type=dd&tpl=prometheus-dd&rr=true&ddurl=https://oapi.dingtalk.com/robot/send?access_token=xxxx,https://oapi.dingtalk.com/robot/send?access_token=xxxxxx,https://oapi.dingtalk.com/robot/send?access_token=xxxxxx'
+```
+
 #### 使用该功能需要使用者对go语言的template模版有一些初步了解，可以参考默认模版的一些语法来进行自定义。
 
 #### 模版数据等信息均存储在程序目录的下的`db/PrometheusAlertDB.db`中。
@@ -183,7 +192,7 @@ receivers:
 {{ end }}
 ```
 
-- 转换UTC时间到CST时间 `{{GetCSTtime ""}}` ,如
+- 转换UTC时间到CST时间 `{{GetCSTtime $v.startsAt}}` ,如
 
 ```
 {{ $var := .externalURL}}{{ range $k,$v:=.alerts }}
@@ -239,6 +248,8 @@ receivers:
 
 ### 3 `GetTime` 函数仅支持在PrometheusAlert的自定义模版中使用，该函数主要用于将`毫秒或秒`级时间戳转换为时间字符
 
+特别说明：`GetTime`函数支持字符和数值类型参数，字符型支持秒级和毫秒级时间戳的处理，数值类型暂时只支持秒级时间戳处理。
+
 目前支持两种使用方式：
 
 - 使用默认时间字符串格式输出 `{{GetTime .Timestamp}}` ,如：
@@ -263,6 +274,7 @@ dimensions: {{.Dimensions}}
 ```
 
 - 指定输出时间格式输出 `{{GetTime .Timestamp "2006/01/02 15:04:05"}}` ,如
+
 
 ```
 ALiYun {{.AlertState}}信息

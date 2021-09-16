@@ -21,14 +21,14 @@ Usage: zabbixclient [-h] [-t SendTarget] [-m SendMessage] [-type SendType] [-d P
 Example(发送告警到钉钉)：zabbixclent -t https://oapi.dingtalk.com/robot/send?access_token=xxxxx -m zabbix告警测试 -type dh -d http://127.0.0.1:8080/zabbix
 
 Options:
-  -d PrometheusAlert的地址
+  -d PrometheusAlert的地址（必须参数）
     	PrometheusAlert的地址 (default "http://127.0.0.1:8080/zabbix")
   -h	显示帮助
-  -m 告警消息内容
+  -m 告警消息内容（必须参数）
     	需要发送的告警消息内容 (default "zabbix告警测试")
-  -t 手机号/钉钉url/微信url/飞书url
+  -t 手机号/钉钉url/微信url/飞书url（可选参数，如无则从PrometheusAlert的app.conf文件中读取默认配置）
     	指定告警消息的接收目标的手机号/钉钉url/微信url (default "https://oapi.dingtalk.com/robot/send?access_token=xxxxx")
-  -type txdx(腾讯云短信)、txdh(腾讯云电话)、alydx(阿里云短信)、alydh(阿里云电话)、hwdx(华为云短信)、rlydh(荣联云电话)、dd(钉钉)、wx(微信)、fs(飞书)
+  -type txdx(腾讯云短信)、txdh(腾讯云电话)、alydx(阿里云短信)、alydh(阿里云电话)、hwdx(华为云短信)、rlydh(荣联云电话)、dd(钉钉)、wx(微信)、fs(飞书) （必须参数）
     	告警消息的目标类型,支持txdx(腾讯云短信)、txdh(腾讯云电话)、alydx(阿里云短信)、alydh(阿里云电话)、hwdx(华为云短信)、rlydh(荣联云电话)、dd(钉钉)、wx(微信)、fs(飞书) (default "dd")
 ```
 
@@ -40,8 +40,8 @@ Zabbix后台配置
 
 ```
 #脚本参数
-    -t
-    https://oapi.dingtalk.com/robot/send?access_token=xxxxxxxxxxxxxxxxxxxxxxxxxxx #指定告警消息的接收目标的手机号/钉钉url/微信url，注意需要与-type参数对应
+    -t （可选参数）
+    https://oapi.dingtalk.com/robot/send?access_token=xxxxxxxxxxxxxxxxxxxxxxxxxxx #指定告警消息的接收目标的手机号/钉钉url/微信url，注意需要与-type参数对应（可选参数）
     -m
     {ALERT.MESSAGE}   #这事zabbix内置消息变量名
     -type
@@ -131,9 +131,9 @@ Zabbix后台配置
 [PrometheusAlert告警平台告警信息](https://zabbix.nb.cn)
 >**{TRIGGER.NAME}**
 >`故障时间：`{EVENT.DATE} {EVENT.TIME}
-`故障前状态：`{TRIGGER.SEVERITY}
-`故障事件ID：`{ITEM.LASTVALUE}
-`故障主机IP:`{EVENT.ID}
+`告警级别：`{TRIGGER.SEVERITY}
+`故障前状态：`{ITEM.LASTVALUE}
+`故障事件ID:`{EVENT.ID}
 `故障主机IP：`{HOST.IP}
 `故障主机名：`{HOST.NAME}
 `故障时长：`{EVENT.AGE}
@@ -147,8 +147,8 @@ Zabbix后台配置
 [PrometheusAlert告警平台恢复信息](https://zabbix.nb.cn)
 >**{TRIGGER.NAME} 已经恢复**
 >`恢复时间：`{EVENT.RECOVERY.DATE} {EVENT.RECOVERY.TIME}
-`故障前状态：`{TRIGGER.SEVERITY}
-`故障事件ID：`{ITEM.LASTVALUE}
+`告警级别：`{TRIGGER.SEVERITY}
+`故障前状态：`{ITEM.LASTVALUE}
 `故障主机IP：`{HOST.IP}
 `故障主机名：`{HOST.NAME}
 `故障时长：`{EVENT.AGE}
@@ -162,8 +162,8 @@ Zabbix后台配置
 [PrometheusAlert告警平台确认信息](https://zabbix.nb.cn)
 >**{USER.FULLNAME} 已经确认故障原因**
 >`确认时间：`{ACK.DATE} {ACK.TIME}
-`故障前状态：`{TRIGGER.SEVERITY}
-`故障事件ID：`{ITEM.LASTVALUE}
+`告警级别：`{TRIGGER.SEVERITY}
+`故障前状态：`{ITEM.LASTVALUE}
 `故障主机IP：`{HOST.IP}
 `故障主机名：`{HOST.NAME}
 `故障时长：`{EVENT.AGE}
