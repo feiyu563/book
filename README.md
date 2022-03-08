@@ -16,7 +16,7 @@
 
 -----------------
 
-PrometheusAlert是开源的运维告警中心消息转发系统，支持主流的监控系统Prometheus、Zabbix，日志系统Graylog2，Graylog3、数据可视化系统Grafana、SonarQube，以及所有支持WebHook接口的系统发出的预警消息，支持将收到的这些消息发送到钉钉，微信，email，飞书，腾讯短信，腾讯电话，阿里云短信，阿里云电话，华为短信，百度云短信，容联云电话，七陌短信，七陌语音，TeleGram，百度Hi(如流)等。
+PrometheusAlert是开源的运维告警中心消息转发系统，支持主流的监控系统Prometheus、Zabbix，日志系统Graylog2，Graylog3、数据可视化系统Grafana、SonarQube。阿里云-云监控，以及所有支持WebHook接口的系统发出的预警消息，支持将收到的这些消息发送到钉钉，微信，email，飞书，腾讯短信，腾讯电话，阿里云短信，阿里云电话，华为短信，百度云短信，容联云电话，七陌短信，七陌语音，TeleGram，百度Hi(如流)等。
 
 ![it](https://gitee.com/feiyu563/PrometheusAlert/raw/master/doc/it.png)
 
@@ -29,13 +29,56 @@ PrometheusAlert是开源的运维告警中心消息转发系统，支持主流�
 <br>
 <br>
 
+
+## 构建
+
+应用信息和构建相关的命令都写入了Makefile，请确保安装`make`, `git`, `go`命令。如有特定需要，请自行修改Makefile。
+
+```bash
+# 默认
+make
+
+# 只运行构建
+make build
+
+# 运行 go fmt
+make format
+
+# 运行 go vet
+make vet
+
+# 运行 go test
+make test
+
+# 构建镜像
+make docker
+
+# 推送镜像
+make docker-push
+
+# 运行镜像测试
+make docker-test
+
+
+# 运行
+copy conf/app-example.conf conf/app.conf
+./PrometheusAlert
+# 测试应用健康
+curl http://localhost:8080/health
+```
+
+
+<br/>
+<br/>
+
+
 ## 启动
 
 ```
 #打开PrometheusAlert releases页面，根据需要选择需要的版本下载到本地解压并进入解压后的目录
-如linux版本(https://github.com/feiyu563/PrometheusAlert/releases/download/v4.6.0/linux.zip)
+如linux版本(https://github.com/feiyu563/PrometheusAlert/releases/download/v4.7/linux.zip)
 
-# wget https://github.com/feiyu563/PrometheusAlert/releases/download/v4.6.0/linux.zip && unzip linux.zip &&cd linux/
+# wget https://github.com/feiyu563/PrometheusAlert/releases/download/v4.7/linux.zip && unzip linux.zip &&cd linux/
 
 #运行PrometheusAlert
 # ./PrometheusAlert (#后台运行请执行 nohup ./PrometheusAlert &)
@@ -44,6 +87,26 @@ PrometheusAlert是开源的运维告警中心消息转发系统，支持主流�
 #默认登录帐号和密码在app.conf中有配置
 ```
 
+## Docker 启动
+
+配置文件 app.conf 的内容可以使用环境变量的方式初始化。
+
+所设置的变量前缀必须以 `PA_` 开始，后面使用配置文件的配置项名称，**但是需要将配置项中所有的 `-` 替换为 `_`**。
+
+特别注意的是使用环境变量对配置项中的大小写并不敏感。
+
+示例
+
+```
+docker run -d \
+-e PA_LOGIN_USER=prometheusalert \
+-e PA_LOGIN_PASSWORD=prometheusalert \
+-e PA_TITLE=PrometheusAlert \
+-e PA_OPEN_FEISHU=1 \
+feiyu563/prometheus-alert
+```
+
+所有的配置文件内容请[点击此处](https://github.com/feiyu563/PrometheusAlert/blob/master/conf/app-example.conf)查看
 
 <br>
 <br>
@@ -68,17 +131,25 @@ PrometheusAlert具备如下特性
  - 增加自定义告警消息模版支持，可以通过自定义模版对任意服务WebHook进行支持
  - 增加代理支持
  - 增加支持mysql、sqlite3(默认)、postgres作为模版存储，便于集群化部署
- - 增加支持钉钉，企业微信，飞书V2的@某人功能
- 
+ - 增加支持钉钉，企业微信的@某人功能
+ - 增加支持阿里云-云监控告警
+ - 增加随机轮询，目前仅针对ddurl，fsurl，wxurl有效，默认情况下如果上述Url配置的是多个地址，则多个地址全部发送，如开启该选项，则从多个地址中随机取一个地址发送，主要是为了避免消息发送频率过高导致触发部分机器人拦截消息
+ - 增加支持将Prometheus告警记录写入到Elasticsearch7.x，可通过Kibana进行界面查看告警记录和配置表格导出。
+ - 增加支持将Gitlab webhook event推送到企微和钉钉。
+
 ---------------------
 
 致谢以下伙伴对PrometheusAlert的贡献
 ---------------------
+ - [@cyancow](https://github.com/cyancow)
+ - [@birkh8792](https://github.com/birkh8792)
  - [@minibear2333](https://github.com/minibear2333)
  - [@bigdimple](https://github.com/bigdimple)
  - [@ysicing](https://github.com/ysicing)
  - [@Zhang21](https://github.com/Zhang21)
  - [@jicki](https://github.com/jicki)
+ - [@guvmao](https://github.com/guvmao)
+ - [@lusson-luo](https://github.com/lusson-luo)
 
 
 --------------------------------------

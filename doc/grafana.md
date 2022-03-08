@@ -4,7 +4,7 @@
 
 ![grafana1](https://gitee.com/feiyu563/PrometheusAlert/raw/master/doc/addchannel.png)
 ##### 注意此处的地址需要去PrometheusAlert的模版页面获取，如发送给钉钉的grafana模版`http://[prometheusalert_url]:8080/prometheusalert?type=dd&tpl=grafana-dd&ddurl=钉钉机器人地址&at=18888888888`
-![grafana2](https://gitee.com/feiyu563/PrometheusAlert/raw/master/doc/addchannel2.png)
+![grafana2](../addchannel2.png)
 PrometheusAlert的模版页面
 ![grafana4](https://gitee.com/feiyu563/PrometheusAlert/raw/master/doc/grafanaalert3.png)
 配置完成后保存即可.继续进行告警消息配置,选择任意一个折线图,点击编辑,进入aler配置,配置参考下图:
