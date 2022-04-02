@@ -18,7 +18,7 @@
 
 PrometheusAlert是开源的运维告警中心消息转发系统，支持主流的监控系统Prometheus、Zabbix，日志系统Graylog2，Graylog3、数据可视化系统Grafana、SonarQube。阿里云-云监控，以及所有支持WebHook接口的系统发出的预警消息，支持将收到的这些消息发送到钉钉，微信，email，飞书，腾讯短信，腾讯电话，阿里云短信，阿里云电话，华为短信，百度云短信，容联云电话，七陌短信，七陌语音，TeleGram，百度Hi(如流)等。
 
-![it](https://gitee.com/feiyu563/PrometheusAlert/raw/master/doc/it.png)
+![it](doc/it.png)
 
 -----------------
 * 如果这个项目能为您带来帮助，我将感到非常荣幸！同时非常欢迎您加入PrometheusAlert全家桶的微信群一起探讨关于PrometheusAlert新一期的开发计划。
@@ -113,9 +113,8 @@ feiyu563/prometheus-alert
 
 -----------------
 
-![dashboard](https://gitee.com/feiyu563/PrometheusAlert/raw/master/doc/dashboard.png)
-![dashboard-test](https://gitee.com/feiyu563/PrometheusAlert/raw/master/doc/dashboard-test.png)
-![dashboard-tpl-list](https://gitee.com/feiyu563/PrometheusAlert/raw/master/doc/dashboard-tpl-list.png)
+![dashboard](doc/images/dashboard.png)
+![dashboard-test](doc/images/template.png)
 
 --------------------------------------
 
@@ -136,6 +135,7 @@ PrometheusAlert具备如下特性
  - 增加随机轮询，目前仅针对ddurl，fsurl，wxurl有效，默认情况下如果上述Url配置的是多个地址，则多个地址全部发送，如开启该选项，则从多个地址中随机取一个地址发送，主要是为了避免消息发送频率过高导致触发部分机器人拦截消息
  - 增加支持将Prometheus告警记录写入到Elasticsearch7.x，可通过Kibana进行界面查看告警记录和配置表格导出。
  - 增加支持将Gitlab webhook event推送到企微和钉钉。
+ - 增加告警路由和告警记录功能，可通过页面查看告警历史和操作告警消息路由。
 
 ---------------------
 
@@ -154,15 +154,74 @@ PrometheusAlert具备如下特性
 
 --------------------------------------
 
+## PrometheusAlert全家桶新手入门
+
+* [【PrometheusAlert入门】](doc/readme/base-install.md)
+  * [安装部署PrometheusAlert](doc/readme/base-install.md)
+  * [接口说明](doc/readme/base-restful.md)
+  * [Metrics指标](doc/readme/base-metrics.md)
+  * [其他配置](doc/readme/base-other.md)
+
+* [【 app.conf 默认参数配置】](doc/readme/conf.md)
+  * [钉钉告警配置](doc/readme/conf-dingding.md)
+  * [飞书告警配置](doc/readme/conf-feishu.md)
+  * [企业微信告警配置](doc/readme/conf-wechat.md)
+  * [企业微信应用告警配置](doc/readme/conf-workwechat.md)
+  * [阿里云短信和电话告警配置](doc/readme/conf-aliyun.md)
+  * [腾讯云短信和电话告警配置](doc/readme/conf-tx.md)
+  * [容联云电话告警配置](doc/readme/conf-rly.md)
+  * [华为云短信配置](doc/readme/conf-hw.md)
+  * [百度云短信配置](doc/readme/conf-bd.md)
+  * [Email配置](doc/readme/conf-email.md)
+  * [七陌短信和电话告警配置](doc/readme/conf-7moor.md)
+  * [TeleGram告警配置](doc/readme/conf-tg.md)
+  * [Bark告警配置](doc/readme/conf-bark.md)
+  * [百度Hi(如流)告警配置](doc/readme/conf-ruliu.md)
+  * [告警记录-ES接入配置](doc/readme/conf-es.md)
+
+* [【告警系统接入PrometheusAlert配置】](doc/readme/system.md)
+  * [Prometheus 接入配置](doc/readme/system-prometheus.md)
+  * [graylog接入配置](doc/readme/system-graylog.md)
+  * [grafana接入配置](doc/readme/system-grafana.md)
+  * [zabbix（内置固定消息模版）接入配置](doc/readme/system-zabbix.md)
+  * [sonarqube接入配置](doc/readme/system-sonarqube.md)
+  * [jenkins接入配置](doc/readme/system-jenkins.md)
+  * [阿里云-云监控（自定义消息模版）接入配置](doc/readme/system-yunjiankong.md)
+  * [Gitlab webhook接入配置](doc/readme/system-gitlab.md)
+  * [【WebHook】](doc/readme/system-webhook.md)
+  * [★ 进阶用法--自定义模版](doc/readme/system-customtpl.md)
+  * [★ 进阶用法--自定义模版函数(时区转换、文本操作等)](doc/readme/system-func.md)
+  * [★ 进阶用法--自定义模版参数说明](doc/readme/system-var.md)
+
+* [【Dashboard页面功能使用】](doc/readme/web.md)
+  * [【告警路由功能】](doc/readme/web-router.md)
+
+* [【版本更新说明】](https://github.com/feiyu563/PrometheusAlert/releases)
+* [【如何对PrometheusAlert进行二次开发】](https://github.com/feiyu563/PrometheusAlert/wiki/%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E3%80%90PrometheusAlert%E3%80%91%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91)
+* [通用自定义模板共享链接](https://github.com/feiyu563/PrometheusAlert/issues/30)
+* [Prometheus rules共享链接](https://github.com/feiyu563/PrometheusAlert/issues/89)
+* [【如何捐赠】](doc/readme/donate.md)
+
+--------------------------------------
 
 项目源码
+
 ----
 
  - [【GitHub】: PrometheusAlert](https://github.com/feiyu563/PrometheusAlert)
  - [【码云】: PrometheusAlert](https://gitee.com/feiyu563/PrometheusAlert)
 
-【FOR HELP】
-----
-【Email: 244217140@qq.com】
+---
 
-![me](https://gitee.com/feiyu563/PrometheusAlert/raw/master/doc/wx.png)
+加入PrometheusAlert微信交流群
+
+----
+
+
+![me](doc/wx.png)
+
+---
+
+Email: 244217140@qq.com
+
+----
