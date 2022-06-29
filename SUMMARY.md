@@ -22,6 +22,8 @@
   * [Bark告警配置](doc/readme/conf-bark.md)
   * [百度Hi(如流)告警配置](doc/readme/conf-ruliu.md)
   * [告警记录-ES接入配置](doc/readme/conf-es.md)
+  * [语音播报](doc/readme/conf-voice.md)
+  * [飞书机器人应用](doc/readme/conf-feishuapp.md)
 
 * [【告警系统接入PrometheusAlert配置】](doc/readme/system.md)
   * [Prometheus 接入配置](doc/readme/system-prometheus.md)
@@ -36,6 +38,7 @@
   * [★ 进阶用法--自定义模版](doc/readme/system-customtpl.md)
   * [★ 进阶用法--自定义模版函数(时区转换、文本操作等)](doc/readme/system-func.md)
   * [★ 进阶用法--自定义模版参数说明](doc/readme/system-var.md)
+  * [★ 进阶用法--go模版语法](doc/readme/system-go-template.md)
 
 * [【Dashboard页面功能使用】](doc/readme/web.md)
   * [【告警路由功能】](doc/readme/web-router.md)

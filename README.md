@@ -99,11 +99,14 @@ curl http://localhost:8080/health
 
 ```
 docker run -d \
+-p 8080:8080 \
 -e PA_LOGIN_USER=prometheusalert \
 -e PA_LOGIN_PASSWORD=prometheusalert \
 -e PA_TITLE=PrometheusAlert \
 -e PA_OPEN_FEISHU=1 \
-feiyu563/prometheus-alert
+-e PA_OPEN_DINGDING=1 \
+-e PA_OPEN_WEIXIN=1 \
+feiyu563/prometheus-alert:latest
 ```
 
 所有的配置文件内容请[点击此处](https://github.com/feiyu563/PrometheusAlert/blob/master/conf/app-example.conf)查看
@@ -136,6 +139,8 @@ PrometheusAlert具备如下特性
  - 增加支持将Prometheus告警记录写入到Elasticsearch7.x，可通过Kibana进行界面查看告警记录和配置表格导出。
  - 增加支持将Gitlab webhook event推送到企微和钉钉。
  - 增加告警路由和告警记录功能，可通过页面查看告警历史和操作告警消息路由。
+ - 增加告警语音播报插件。
+ - 增加支持飞书机器人应用。
 
 ---------------------
 
@@ -155,6 +160,18 @@ PrometheusAlert具备如下特性
 --------------------------------------
 
 ## PrometheusAlert全家桶新手入门
+
+### 系统接入PrometheusAlert流程
+
+#### PrometheusAlert的原理就是通过自定义模版接口`/prometheusalert`接收各种告警系统或者任何带有WebHook功能的系统发来的消息，然后将收到的消息经过自定义模板渲染成消息文本，最终转发给不同的接收目标。
+
+#### 一般情况下如果使用的是钉钉，企业微信、飞书等机器人作为接收目标的，可以不去配置PrometheusAlert的配置文件app.conf；但是如果需要使用如短信，电话，邮箱等功能，则需要先配置好app.conf中的相关配置项方可使用。
+
+- 1.安装好PrometheusAlert 参考：[安装部署PrometheusAlert](base-install.md)
+- 2.配置 app.conf [可选] 参考：[【 app.conf 默认参数配置】](conf.md)
+- 3.配置告警系统接入PrometheusAlert 参考：[【告警系统接入PrometheusAlert配置】](doc/readme/system.md)
+
+### 目录
 
 * [【PrometheusAlert入门】](doc/readme/base-install.md)
   * [安装部署PrometheusAlert](doc/readme/base-install.md)
@@ -178,6 +195,8 @@ PrometheusAlert具备如下特性
   * [Bark告警配置](doc/readme/conf-bark.md)
   * [百度Hi(如流)告警配置](doc/readme/conf-ruliu.md)
   * [告警记录-ES接入配置](doc/readme/conf-es.md)
+  * [语音播报](doc/readme/conf-voice.md)
+  * [飞书机器人应用](doc/readme/conf-feishuapp.md)
 
 * [【告警系统接入PrometheusAlert配置】](doc/readme/system.md)
   * [Prometheus 接入配置](doc/readme/system-prometheus.md)
@@ -192,6 +211,7 @@ PrometheusAlert具备如下特性
   * [★ 进阶用法--自定义模版](doc/readme/system-customtpl.md)
   * [★ 进阶用法--自定义模版函数(时区转换、文本操作等)](doc/readme/system-func.md)
   * [★ 进阶用法--自定义模版参数说明](doc/readme/system-var.md)
+  * [★ 进阶用法--go模版语法](doc/readme/system-go-template.md)
 
 * [【Dashboard页面功能使用】](doc/readme/web.md)
   * [【告警路由功能】](doc/readme/web-router.md)
