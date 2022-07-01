@@ -48,4 +48,3 @@
 * [通用自定义模板共享链接](https://github.com/feiyu563/PrometheusAlert/issues/30)
 * [Prometheus rules共享链接](https://github.com/feiyu563/PrometheusAlert/issues/89)
 * [【如何捐赠】](doc/readme/donate.md)
-

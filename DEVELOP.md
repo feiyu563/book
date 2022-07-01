@@ -4,7 +4,7 @@
 
 推荐环境
 
-1\) go version &gt; go 1.11 [golang下载](https://golang.org/dl/) 2\) 包管理工具 go mod\(go 1.11默认包含\) 3\) 推荐同时安装git
+1\) go version &gt; go 1.16+ [golang下载](https://golang.org/dl/) 2\) 包管理工具 go mod\(go 1.16+默认包含\) 3\) 推荐同时安装git
 
 Clone项目代码
 
